@@ -10,6 +10,10 @@ class CourierTests(unittest.TestCase):
     def test_discount(self):
         package = Courier(100,10,100,"OFR003")
         self.assertEqual(package.discount(), 35)
+    
+    def test_total_cost(self):
+        package = Courier(100,10,100,"OFR003")
+        self.assertEqual(package.total_cost(), 665)
 
 
 if __name__ == '__main__':

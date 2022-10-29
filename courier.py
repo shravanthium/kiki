@@ -55,3 +55,6 @@ class Courier:
                     return (percent/100) * self.delivery_cost()
 
         return 0
+
+    def total_cost(self):
+        return self.delivery_cost() - self.discount()
