@@ -52,7 +52,7 @@ class Courier:
                 if self.distance_in_km in range(
                     distance[0], distance[1]
                 ) and self.pkg_weight_in_kg in range(weight[0], weight[1]):
-                    return (percent/100) * self.delivery_cost()
+                    return int((percent/100) * self.delivery_cost())
 
         return 0
 
