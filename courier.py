@@ -22,11 +22,13 @@ class Courier:
         },
     }
 
-    def __init__(self, base_delivery_cost, pkg_weight_in_kg, distance_in_km, offer_code=0):
+    def __init__(self, id, base_delivery_cost, pkg_weight_in_kg, distance_in_km, offer_code=0):
+        self.id = id
         self.base_delivery_cost = base_delivery_cost
         self.pkg_weight_in_kg = pkg_weight_in_kg
         self.distance_in_km = distance_in_km
         self.offer_code = offer_code
+        self.estimated_delivery_time = None
 
     def delivery_cost(self):
         # DELIVERY COST=Base Delivery Cost+(Package Total Weight * 10)+(Distance to Destination * 5)
