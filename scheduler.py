@@ -5,7 +5,9 @@ class Scheduler:
         self.available_trucks = available_trucks
         self.current_time = 0
         self.remaining_packages = packages
+        self.remaining_trucks = available_trucks
         self.max_speed = max_speed
+        self.trip_duration = []
 
     def get_shipment(self):
         possible_shipments = {}
@@ -35,6 +37,7 @@ class Scheduler:
             possible_shipments[max_weight] = shipments
             trip_weight = max(trip_weight, max_weight)
 
+        self.remaining_trucks -= 1
         self.update_remaining_packages(possible_shipments[trip_weight])
         return possible_shipments[trip_weight]
 
@@ -45,11 +48,9 @@ class Scheduler:
         self.remaining_packages = current_remaining_packages
         return self.remaining_packages
 
-    def update_current_time(self, trip_duration):
-        if self.current_time == 0:
-            self.current_time += trip_duration
-        else:
-            self.current_time = min(self.current_time, trip_duration)
+    def update_current_time(self):
+        if self.remaining_trucks == 0:
+            self.current_time += min(self.trip_duration)
         return self.current_time
 
     def update_delivery_time(self, shipments):
@@ -65,11 +66,16 @@ class Scheduler:
             package.estimated_delivery_time = duration
             trip_duration = max(duration, trip_duration)
         trip_duration *= 2
-        self.update_current_time(trip_duration)
+        self.trip_duration.append(trip_duration)
+        self.update_current_time()
         return trip_duration
 
     def generate_schedules(self):
+
         while len(self.remaining_packages) > 0:
+            if self.remaining_trucks == 0:
+                self.remaining_trucks = self.available_trucks
+                self.trip_duration = []
 
             shipments = self.get_shipment()
             self.update_delivery_time(shipments)
