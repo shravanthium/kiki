@@ -2,6 +2,8 @@
 A small distance courier service to deliver packages.
 
 
+### Modules
+
 This repo consists of below modules:
 
 1. Courier Module:
@@ -21,4 +23,10 @@ Command to compute delivery time for each packge from cli.
 
 ```
 $ python3 kiki.py 100 5 -p PKG1,50,30,OFR001 PKG2,75,125,OFFR0002 PKG3,175,100,OFFR003 PKG4,110,60,OFFR002 PKG5,155,95,NA -v 2,70,200
+```
+
+### Tests
+Command to run tests.
+```
+$python3 tests.py -v
 ```
