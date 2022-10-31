@@ -1,3 +1,8 @@
+""" 
+Scheduler: This module contains methods to compute estimated delivery time for each package.
+"""
+
+
 class Scheduler:
     def __init__(self, packages, max_load_capacity, available_trucks, max_speed):
         self.packages = packages
@@ -60,10 +65,8 @@ class Scheduler:
             return trip_duration
 
         for package in shipments:
-            duration = (
-                round((package.distance_in_km / self.max_speed), 2) + self.current_time
-            )
-            package.estimated_delivery_time = duration
+            duration = (package.distance_in_km / self.max_speed) + self.current_time
+            package.estimated_delivery_time = round(duration, 2)
             trip_duration = max(duration, trip_duration)
         trip_duration *= 2
         self.trip_duration.append(trip_duration)
